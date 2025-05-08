@@ -88,9 +88,6 @@ Port 5000 shouldn't be exposed publicly — use 127.0.0.1
 NGINX restarts silently unless you run nginx -t before restarting (always test first)
 
 ## 🧪 How to Run Locally
-bash
-Copy
-Edit
 git clone git@github.com:maltrbl/nba-match-simulator.git
 cd nba-match-simulator
 python3 -m venv venv
