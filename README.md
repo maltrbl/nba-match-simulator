@@ -75,7 +75,7 @@ server {
     }
 }
 
-
+```
 💡 Tips from Deployment
 Flask only binds to port 80 with sudo or setcap — better to reverse proxy with NGINX
 
