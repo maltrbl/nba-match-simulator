@@ -77,20 +77,26 @@ server {
 
 ```
 33 💡 Tips from Deployment
-Flask only binds to port 80 with sudo or setcap — better to reverse proxy with NGINX
+- Flask only binds to port 80 with sudo or setcap — better to reverse proxy with NGINX
 
-Amazon Linux uses /etc/nginx/conf.d/ and nginx.conf by default
+- Amazon Linux uses /etc/nginx/conf.d/ and nginx.conf by default
 
-Port 5000 shouldn't be exposed publicly — use 127.0.0.1
+- Port 5000 shouldn't be exposed publicly — use 127.0.0.1
 
-403 Forbidden often = NGINX falling back to its default /usr/share/nginx/html root
+- 403 Forbidden often = NGINX falling back to its default /usr/share/nginx/html root
 
-NGINX restarts silently unless you run nginx -t before restarting (always test first)
+- NGINX restarts silently unless you run nginx -t before restarting (always test first)
 
 ## 🧪 How to Run Locally
+
 git clone git@github.com:maltrbl/nba-match-simulator.git
+
 cd nba-match-simulator
+
 python3 -m venv venv
+
 source venv/bin/activate
+
 pip install flask
+
 python app.py
