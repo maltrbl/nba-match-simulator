@@ -76,7 +76,7 @@ server {
 }
 
 ```
-💡 Tips from Deployment
+33 💡 Tips from Deployment
 Flask only binds to port 80 with sudo or setcap — better to reverse proxy with NGINX
 
 Amazon Linux uses /etc/nginx/conf.d/ and nginx.conf by default
@@ -87,7 +87,7 @@ Port 5000 shouldn't be exposed publicly — use 127.0.0.1
 
 NGINX restarts silently unless you run nginx -t before restarting (always test first)
 
-🧪 How to Run Locally
+## 🧪 How to Run Locally
 bash
 Copy
 Edit
