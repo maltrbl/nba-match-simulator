@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>NBA Match Simulator</title>
+    <style>
+    body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+        background-color: #f4f4f4;
+        max-width: 100%;
+    }
+    h1 {
+        color: #333;
+        font-size: 6vw;
+    }
+    form {
+        display: flex;
+        flex-direction: column;
+        max-width: 100%;
+    }
+    select, button {
+        padding: 10px;
+        margin: 8px 0;
+        font-size: 5vw;
+    }
+    .result, .highlights {
+        margin-top: 20px;
+        background: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        word-wrap: break-word;
+    }
+    @media (min-width: 600px) {
+        h1 { font-size: 28px; }
+        select, button { font-size: 16px; }
+    }
+</style>
+
+</head>
+<body>
+    <h1>🏀 NBA Match Simulator</h1>
+    <form method="post" action="/simulate">
+        <label for="team1">Team 1:</label>
+        <select name="team1" required>
+            {% for team in teams %}
+            <option value="{{ team }}">{{ team }}</option>
+            {% endfor %}
+        </select>
+        <label for="team2">Team 2:</label>
+        <select name="team2" required>
+            {% for team in teams %}
+            <option value="{{ team }}">{{ team }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <label><input type="radio" name="mode" value="single" checked> Single Game</label>
+        <label><input type="radio" name="mode" value="series"> Best of 7 Series</label>
+        <br><br>
+        <button type="submit">Simulate</button>
+    </form>
+
+    {% if error %}
+    <div class="result"><strong style="color:red">{{ error }}</strong></div>
+    {% endif %}
+
+    {% if result %}
+    <div class="result">
+        <h2>🏆 {{ result.winner }} wins!</h2>
+        <p>Final Score: {{ team1 }} {{ result.score1 }} - {{ result.score2 }} {{ team2 }}</p>
+        <p>Top Scorer: {{ result.top_scorer }}</p>
+        <div class="highlights">
+            <h3>🔥 Game Highlights:</h3>
+            <ul>
+                {% for h in result.highlights %}
+                <li>{{ h }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    {% endif %}
+
+    {% if series_results %}
+    <div class="result">
+        <h2>🏆 Series Results</h2>
+        <p>{{ series_wins }}</p>
+        {% for game in series_results %}
+        <hr>
+        <p><strong>Game {{ loop.index }}:</strong> {{ game.winner }} wins {{ game.score1 }} - {{ game.score2 }}</p>
+        <p>Top Scorer: {{ game.top_scorer }}</p>
+        <ul>
+            {% for h in game.highlights %}
+            <li>{{ h }}</li>
+            {% endfor %}
+        </ul>
+        {% endfor %}
+    </div>
+    {% endif %}
+</body>
+</html>
